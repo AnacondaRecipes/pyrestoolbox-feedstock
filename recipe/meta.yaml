@@ -1,0 +1,56 @@
+{% set name = "pyrestoolbox" %}
+{% set version = "2.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pyrestoolbox-{{ version }}.tar.gz
+  sha256: 0ff3839b0e31621d1e2fd32aa810b7f02e2bdbc57f5c160d70e9c7817c7774ff
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python
+    - setuptools
+    - wheel
+    - pip
+  run:
+    - python
+    - requests
+    - numpy
+    - scipy
+    - pandas
+    - tabulate
+    - gwr-inversion
+    - mpmath
+    - openpyxl
+    - setuptools
+
+test:
+  imports:
+    - pyrestoolbox
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/mwburgoyne/pyResToolbox
+  summary: pyResToolbox - A collection of Reservoir Engineering Utilities
+  license: GPL-3.0
+  license_file: LICENSE
+  dev_url: https://github.com/mwburgoyne/pyResToolbox
+  doc_url: https://github.com/mwburgoyne/pyResToolbox/blob/main/README.rst 
+
+extra:
+  anaconda-services:
+    ref: https://anaconda.zendesk.com/agent/tickets/49247
+    reason: Client request
+  recipe-maintainers:
+    - ianaobi 
